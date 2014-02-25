@@ -13,6 +13,7 @@ TestResults
 *.suo
 *.user
 *.sln.docstates
+*.sap
 
 # Build results
 [Dd]ebug/
