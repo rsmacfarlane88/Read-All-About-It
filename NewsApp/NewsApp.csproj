@@ -124,8 +124,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="NewsApp_2014_02_25_21_55_13.sap" />
-    <None Include="NewsApp_2014_02_25_21_55_53.sap" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
