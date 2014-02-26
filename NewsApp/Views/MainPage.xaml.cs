@@ -106,7 +106,7 @@ namespace NewsApp
             
             if (selectedItem != null)
             {
-                NavigationService.Navigate(new Uri(string.Format("/ItemDetail.xaml?link={0}", selectedItem.ItemLink), UriKind.Relative));
+                NavigationService.Navigate(new Uri(string.Format("/Views/ItemDetail.xaml?link={0}", selectedItem.ItemLink), UriKind.Relative));
             }
 
             ListBoxHeadlines.SelectedItem = null;
@@ -118,13 +118,18 @@ namespace NewsApp
 
             if (selectedItem != null)
             {
-                NavigationService.Navigate(new Uri(string.Format("/ItemDetail.xaml?link={0}", selectedItem.ItemLink), UriKind.Relative));
+                NavigationService.Navigate(new Uri(string.Format("/Views/ItemDetail.xaml?link={0}", selectedItem.ItemLink), UriKind.Relative));
             }
 
             ListBoxMostRead.SelectedItem = null;
         }
 
         private void ListBoxSections_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ReadLater_Click(object sender, RoutedEventArgs e)
         {
 
         }
