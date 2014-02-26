@@ -32,12 +32,12 @@
                 <ListBox x:Name="ListBoxHeadlines" SelectionChanged="ListBoxHeadlines_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <toolkit:ContextMenuService.ContextMenu>
-                                <toolkit:ContextMenu IsZoomEnabled="True" x:Name="headlinesContext">
-                                    <toolkit:MenuItem x:Name="miReadLater" Header="Save for later" Click="ReadLater_Click" />
-                                </toolkit:ContextMenu>
-                            </toolkit:ContextMenuService.ContextMenu>
                             <StackPanel Orientation="Horizontal">
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu IsZoomEnabled="True" x:Name="headlinesContext">
+                                        <toolkit:MenuItem x:Name="miReadLater" Header="Save for later" Click="ReadLater_Click" />
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
                                 <Image Margin="0,8" Height="81" Width="144" Source="{Binding ImageUri}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="{Binding Title}" Width="280" TextWrapping="Wrap" FontWeight="ExtraBold" Foreground="Black"/>
