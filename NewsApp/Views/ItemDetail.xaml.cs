@@ -23,7 +23,7 @@ namespace NewsApp
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            link = new Uri(this.NavigationContext.QueryString["link"]);
+            link = new Uri("http://mobilizer.instapaper.com/m?u=" + this.NavigationContext.QueryString["link"]);
             //link = link.Replace("/news/", "/textbased/news/").Replace("/article-", "/text-");
 
             this.WebBrowser1.Loaded += webBrowser_Loaded;

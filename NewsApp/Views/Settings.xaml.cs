@@ -8,7 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace NewsApp.Pages
+namespace NewsApp
 {
     public partial class Settings : PhoneApplicationPage
     {
