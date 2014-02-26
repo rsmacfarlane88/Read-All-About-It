@@ -93,6 +93,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppSettings.cs" />
     <Compile Include="Feed.cs" />
     <Compile Include="FeedItem.cs" />
     <Compile Include="ItemDetail.xaml.cs">
