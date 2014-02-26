@@ -131,7 +131,9 @@ namespace NewsApp
 
         private void ReadLater_Click(object sender, RoutedEventArgs e)
         {
-
+            var selected = (sender as MenuItem).DataContext as FeedItem;
+            var title = selected.Title;
+            
         }
 
         // Sample code for building a localized ApplicationBar
