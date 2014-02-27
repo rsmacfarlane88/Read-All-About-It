@@ -25,12 +25,15 @@ namespace NewsApp
         public MainPage()
         {
             InitializeComponent();
+            BuildLocalizedApplicationBar();
 
             if (NetworkInterface.GetIsNetworkAvailable())
             {
                 FillHeadlines();
                 FillMostRead();
             }
+
+            
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
         }
@@ -67,7 +70,7 @@ namespace NewsApp
                    {
                        Title = item.Element("title").Value,
                        Description = item.Element("description").Value,
-                       ImageUri = new Uri(item.Element(media + "thumbnail").Attribute("url").Value),//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
+                       //ImageUri = new Uri(item.Element(media + "thumbnail").Attribute("url").Value),//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
                        ItemLink = new Uri(item.Element("link").Value)
                    }).Take(5);
 
@@ -88,7 +91,7 @@ namespace NewsApp
                    {
                        Title = item.Element("title").Value,
                        Description = item.Element("description").Value,
-                       ImageUri = new Uri(item.Element(media+"thumbnail").Attribute("url").Value),//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
+                       ImageUri = item.Element(media+"thumbnail") == null ? null: new Uri(item.Element(media+"thumbnail").Attribute("url").Value),//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
                        ItemLink = new Uri(item.Element("link").Value)
                    });
 
@@ -137,19 +140,25 @@ namespace NewsApp
         }
 
         // Sample code for building a localized ApplicationBar
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
-        //    ApplicationBar = new ApplicationBar();
+        private void BuildLocalizedApplicationBar()
+        {
+            // Set the page's ApplicationBar to a new instance of ApplicationBar.
+            ApplicationBar = new ApplicationBar();
 
-        //    // Create a new button and set the text value to the localized string from AppResources.
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
+            // Create a new button and set the text value to the localized string from AppResources.
+            //ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
+            //appBarButton.Text = AppResources.AppBarButtonText;
+            //ApplicationBar.Buttons.Add(appBarButton);
 
-        //    // Create a new menu item with the localized string from AppResources.
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
+            // Create a new menu item with the localized string from AppResources.
+            ApplicationBarMenuItem settingsMenuItem = new ApplicationBarMenuItem(AppResources.SettingsMenuItemText);
+            settingsMenuItem.Click += settingsMenuItem_Click;
+            ApplicationBar.MenuItems.Add(settingsMenuItem);
+        }
+
+        void settingsMenuItem_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/Settings.xaml", UriKind.Relative));
+        }
     }
 }

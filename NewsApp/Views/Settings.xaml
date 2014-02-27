@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wptk="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -34,6 +35,15 @@
                 <wptk:ListPicker x:Name="lpHomeNewsFeed" />
                 <TextBlock Text="Most Read News Feed" />
                 <wptk:ListPicker x:Name="lpMostReadFeed" />
+                <TextBlock Text="Colour" />
+                <c4f:ColorPicker x:Name="colourPicker" />
+                <TextBlock Text="Text Size" />
+                <wptk:ListPicker>
+                    <wptk:ListPickerItem Content="Small" />
+                    <wptk:ListPickerItem Content="Medium" />
+                    <wptk:ListPickerItem Content="Large" />
+                </wptk:ListPicker>
+                <wptk:ToggleSwitch Content="Mobile Friendly Links" />
             </StackPanel>
         </Grid>
     </Grid>
