@@ -96,6 +96,7 @@
     <Compile Include="Utilities\AppSettings.cs" />
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\FeedItem.cs" />
+    <Compile Include="Utilities\DataSerializer.cs" />
     <Compile Include="Views\ItemDetail.xaml.cs">
       <DependentUpon>ItemDetail.xaml</DependentUpon>
     </Compile>

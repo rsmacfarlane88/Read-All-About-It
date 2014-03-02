@@ -66,6 +66,22 @@
 
                 </ListBox>
             </phone:PanoramaItem>
+            <phone:PanoramaItem Header="saved for later">
+                <ListBox x:Name="ListBoxReadLater" SelectionChanged="ListBoxReadLater_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="0,8,5,0" Height="81" Width="144" Source="{Binding ImageUri}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding Title}" Width="280" TextWrapping="Wrap" FontWeight="Bold" Foreground="Black" FontSize="24"/>
+                                    <!--<TextBlock Text="{Binding Description}" Width="300" TextWrapping="Wrap" Foreground="Black"/>-->
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+            </phone:PanoramaItem>
             <phone:PanoramaItem Header="sections">
                 <ListBox x:Name="ListBoxSections" SelectionChanged="ListBoxSections_SelectionChanged">
                     <ListBox.ItemTemplate>

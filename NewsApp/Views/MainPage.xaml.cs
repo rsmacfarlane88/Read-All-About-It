@@ -13,6 +13,7 @@ using System.Xml;
 //using System.ServiceModel.Syndication;
 using System.Xml.Linq;
 using System.Net.NetworkInformation;
+using NewsApp.Utilities;
 
 namespace NewsApp
 {
@@ -20,6 +21,7 @@ namespace NewsApp
     {
         private ObservableCollection<FeedItem> HeadlineItems;
         private ObservableCollection<FeedItem> MostReadItems;
+        private List<FeedItem> ReadLaterItems;
 
         // Constructor
         public MainPage()
@@ -31,6 +33,7 @@ namespace NewsApp
             {
                 FillHeadlines();
                 FillMostRead();
+                FillReadLater();
             }
 
             
@@ -59,6 +62,12 @@ namespace NewsApp
             wc.DownloadStringAsync(new Uri("http://feeds.bbci.co.uk/rss/newsonline_uk_edition/livestats/most_emailed/rss.xml"));
         }
 
+        private void FillReadLater()
+        {
+            ReadLaterItems = DataSerializer.LoadFeedItemsFromStorage("TestFile.xml");
+            ListBoxReadLater.ItemsSource = ReadLaterItems;
+        }
+
         private void wc_MostReadDownloadCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             var media = XNamespace.Get("http://search.yahoo.com/mrss/");
@@ -70,8 +79,8 @@ namespace NewsApp
                    {
                        Title = item.Element("title").Value,
                        Description = item.Element("description").Value,
-                       //ImageUri = new Uri(item.Element(media + "thumbnail").Attribute("url").Value),//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
-                       ItemLink = new Uri(item.Element("link").Value)
+                       //ImageUri = item.Element(media + "thumbnail").Attribute("url").Value,//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
+                       //ItemLink = item.Element("link").Value
                    }).Take(5);
 
             foreach (var item in mostRead)
@@ -91,8 +100,8 @@ namespace NewsApp
                    {
                        Title = item.Element("title").Value,
                        Description = item.Element("description").Value,
-                       ImageUri = item.Element(media+"thumbnail") == null ? null: new Uri(item.Element(media+"thumbnail").Attribute("url").Value),//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
-                       ItemLink = new Uri(item.Element("link").Value)
+                       ImageUri = item.Element(media+"thumbnail").Attribute("url").Value,//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
+                       ItemLink = item.Element("link").Value
                    });
 
             foreach (var item in headlines)
@@ -135,8 +144,16 @@ namespace NewsApp
         private void ReadLater_Click(object sender, RoutedEventArgs e)
         {
             var selected = (sender as MenuItem).DataContext as FeedItem;
-            var title = selected.Title;
+
+
+            DataSerializer.SavedFeedItems.Add(selected);
+            DataSerializer.SaveFeedItemsToStorage();
             
+        }
+
+        private void ListBoxReadLater_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         // Sample code for building a localized ApplicationBar
