@@ -47,7 +47,7 @@ namespace NewsApp.Utilities
                         if (!reader.EndOfStream)
                         {
                             var serializer = new XmlSerializer(typeof(List<FeedItem>));
-                            SavedFeedItems.Add((FeedItem)serializer.Deserialize(reader));
+                            SavedFeedItems = (List<FeedItem>)serializer.Deserialize(reader);
                         }
                     }
                 }
