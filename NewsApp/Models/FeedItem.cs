@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace NewsApp
 {
+    
     public class FeedItem
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public Uri ImageUri { get; set; }
-        public Uri ItemLink { get; set; }
+        public string ImageUri { get; set; }
+        public string ItemLink { get; set; }
     }
 }
