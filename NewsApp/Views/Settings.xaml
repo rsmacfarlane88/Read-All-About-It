@@ -8,13 +8,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wptk="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:settings="clr-namespace:NewsApp.Utilities"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
-    
+
+    <phone:PhoneApplicationPage.Resources>
+        <settings:AppSettings x:Key="appSettings"></settings:AppSettings>
+    </phone:PhoneApplicationPage.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -58,7 +62,7 @@
                     <wptk:ListPickerItem Content="Medium" />
                     <wptk:ListPickerItem Content="Large" />
                 </wptk:ListPicker>
-                <wptk:ToggleSwitch Content="Mobile Friendly Links" />
+                <wptk:ToggleSwitch x:Name="toggleMobilizer" Content="Mobile Friendly Links" IsChecked="{Binding Source={StaticResource appSettings}, Path=MobilizerSetting, Mode=TwoWay}"  />
             </StackPanel>
         </Grid>
     </Grid>

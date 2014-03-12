@@ -13,11 +13,9 @@ namespace NewsApp
 {
     public partial class Settings : PhoneApplicationPage
     {
-        AppSettings settings;
         public Settings()
         {
             InitializeComponent();
-            settings = new AppSettings();
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -29,10 +27,6 @@ namespace NewsApp
 
         private void lpHomeNewsFeed_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = (Feed)lpHomeNewsFeed.SelectedItem;
-            
-            if(selected != null)
-                settings.HomeNewsFeedSetting = selected; 
         }
 
     }
