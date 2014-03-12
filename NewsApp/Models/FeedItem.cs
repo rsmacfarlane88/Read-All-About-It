@@ -13,5 +13,6 @@ namespace NewsApp
         public string Description { get; set; }
         public string ImageUri { get; set; }
         public string ItemLink { get; set; }
+        public string Publisher { get; set; }
     }
 }

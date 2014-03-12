@@ -13,8 +13,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
-
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+    
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -32,7 +32,22 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
                 <TextBlock Text="Home News Feed" />
-                <wptk:ListPicker x:Name="lpHomeNewsFeed" />
+                <wptk:ListPicker x:Name="lpHomeNewsFeed" SelectionChanged="lpHomeNewsFeed_SelectionChanged">
+                    <wptk:ListPicker.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </wptk:ListPicker.ItemTemplate>
+                    <wptk:ListPicker.FullModeItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </wptk:ListPicker.FullModeItemTemplate>
+                </wptk:ListPicker>
                 <TextBlock Text="Most Read News Feed" />
                 <wptk:ListPicker x:Name="lpMostReadFeed" />
                 <TextBlock Text="Colour" />

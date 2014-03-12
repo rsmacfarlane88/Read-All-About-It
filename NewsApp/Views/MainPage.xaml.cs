@@ -79,8 +79,8 @@ namespace NewsApp
                    {
                        Title = item.Element("title").Value,
                        Description = item.Element("description").Value,
-                       //ImageUri = item.Element(media + "thumbnail").Attribute("url").Value,//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
-                       //ItemLink = item.Element("link").Value
+                       ImageUri = item.Element(media + "thumbnail") != null ? item.Element(media + "thumbnail").Attribute("url").Value : null,//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
+                       ItemLink = item.Element("link").Value != null ? item.Element("link").Value : null
                    }).Take(5);
 
             foreach (var item in mostRead)
@@ -101,7 +101,8 @@ namespace NewsApp
                        Title = item.Element("title").Value,
                        Description = item.Element("description").Value,
                        ImageUri = item.Element(media+"thumbnail").Attribute("url").Value,//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
-                       ItemLink = item.Element("link").Value
+                       ItemLink = item.Element("link").Value,
+                       Publisher = "BBC"
                    });
 
             foreach (var item in headlines)
@@ -153,7 +154,14 @@ namespace NewsApp
 
         private void ListBoxReadLater_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var selectedItem = (FeedItem)ListBoxReadLater.SelectedItem;
 
+            if (selectedItem != null)
+            {
+                NavigationService.Navigate(new Uri(string.Format("/Views/ItemDetail.xaml?link={0}", selectedItem.ItemLink), UriKind.Relative));
+            }
+
+            ListBoxReadLater.SelectedItem = null;
         }
 
         // Sample code for building a localized ApplicationBar

@@ -8,12 +8,14 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
+using NewsApp.Utilities;
 
 namespace NewsApp
 {
     public partial class ItemDetail : PhoneApplicationPage
     {
         private Uri link;
+        private const string MOBILIZIER = "http://mobilizer.instapaper.com/m?u=";
 
         public ItemDetail()
         {
@@ -23,8 +25,13 @@ namespace NewsApp
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            link = new Uri("http://mobilizer.instapaper.com/m?u=" + this.NavigationContext.QueryString["link"]);
-            //link = link.Replace("/news/", "/textbased/news/").Replace("/article-", "/text-");
+
+            AppSettings settings = new AppSettings();
+
+            if (settings.MobilizerSetting)
+                link = new Uri(MOBILIZIER + this.NavigationContext.QueryString["link"]);
+            else
+                link = new Uri(this.NavigationContext.QueryString["link"]);
 
             this.WebBrowser1.Loaded += webBrowser_Loaded;
         }

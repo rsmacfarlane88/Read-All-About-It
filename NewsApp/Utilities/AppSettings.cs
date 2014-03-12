@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewsApp
+namespace NewsApp.Utilities
 {
     public class AppSettings
     {
@@ -13,9 +13,11 @@ namespace NewsApp
 
         const string HomeNewsFeedKeyName = "HomeNewsFeed";
         const string MostReadFeedKeyName = "MostReadFeed";
+        const string MobilizerKeyName = "Mobilizer";
 
-        const string HomeNewsFeedDefault = "";
+        const Feed HomeNewsFeedDefault = null;
         const string MostReadFeedDefault = "";
+        const bool MobilizerDefault = false;
 
         public AppSettings()
         {
@@ -89,11 +91,11 @@ namespace NewsApp
         /// <summary>
         /// Property to get and set a Home News Feed Setting Key.
         /// </summary>
-        public string HomeNewsFeedSetting
+        public Feed HomeNewsFeedSetting
         {
             get
             {
-                return GetValueOrDefault<string>(HomeNewsFeedKeyName, HomeNewsFeedDefault);
+                return GetValueOrDefault<Feed>(HomeNewsFeedKeyName, HomeNewsFeedDefault);
             }
             set
             {
@@ -122,7 +124,23 @@ namespace NewsApp
             }
         }
 
-
+        /// <summary>
+        /// Property to get and set a Most Read News Feed Setting Key.
+        /// </summary>
+        public bool MobilizerSetting
+        {
+            get
+            {
+                return GetValueOrDefault<bool>(MobilizerKeyName, MobilizerDefault);
+            }
+            set
+            {
+                if (AddOrUpdateValue(MostReadFeedKeyName, value))
+                {
+                    Save();
+                }
+            }
+        }
 
     }
 }

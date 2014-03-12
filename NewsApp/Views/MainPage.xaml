@@ -38,7 +38,10 @@
                                         <toolkit:MenuItem x:Name="miReadLater" Header="Save for later" Click="ReadLater_Click" />
                                     </toolkit:ContextMenu>
                                 </toolkit:ContextMenuService.ContextMenu>
-                                <Image Margin="0,8" Height="81" Width="144" Source="{Binding ImageUri}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <StackPanel Orientation="Vertical">
+                                    <Image Margin="0,8,8,0" Height="81" Width="144" Source="{Binding ImageUri}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                    <TextBlock Text="{Binding Publisher}" MaxWidth="144" TextWrapping="Wrap" Foreground="Black" HorizontalAlignment="Center" />
+                                </StackPanel>
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="{Binding Title}" Width="280" TextWrapping="Wrap" FontWeight="ExtraBold" Foreground="Black"/>
                                     <TextBlock Text="{Binding Description}" Width="280" TextWrapping="Wrap" Foreground="Black"/>
@@ -82,7 +85,7 @@
 
                 </ListBox>
             </phone:PanoramaItem>
-            <phone:PanoramaItem Header="sections">
+            <phone:PanoramaItem Header="categories">
                 <ListBox x:Name="ListBoxSections" SelectionChanged="ListBoxSections_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>

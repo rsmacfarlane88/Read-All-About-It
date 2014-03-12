@@ -9,7 +9,7 @@ namespace NewsApp
     public class Feed
     {
         public string Name { get; set; }
-        public Uri FeedUri { get; set; }
+        public string FeedUri { get; set; }
         public FeedCategory Category { get; set; }
         public string Publisher { get; set; }
 
