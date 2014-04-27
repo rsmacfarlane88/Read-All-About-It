@@ -10,15 +10,20 @@ using Microsoft.Phone.Shell;
 using NewsApp.Resources;
 using System.Collections.ObjectModel;
 using System.Xml;
-//using System.ServiceModel.Syndication;
 using System.Xml.Linq;
 using System.Net.NetworkInformation;
 using NewsApp.Utilities;
+using System.ServiceModel.Syndication;
+using System.IO.IsolatedStorage;
+using System.IO;
 
 namespace NewsApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private string HeadlineUrl = "http://www.dailymail.co.uk/home/index.rss"; //"http://feeds.bbci.co.uk/news/mobile/rss.xml?edition=uk";
+        private string MostReadUrl = "http://feeds.bbci.co.uk/rss/newsonline_uk_edition/livestats/most_emailed/rss.xml";
+        
         private ObservableCollection<FeedItem> HeadlineItems;
         private ObservableCollection<FeedItem> MostReadItems;
         private List<FeedItem> ReadLaterItems;
@@ -48,7 +53,7 @@ namespace NewsApp
 
             WebClient wc = new WebClient();
             wc.DownloadStringCompleted += wc_HeadlinesDownloadCompleted;
-            wc.DownloadStringAsync(new Uri("http://feeds.bbci.co.uk/news/mobile/rss.xml?edition=uk"));
+            wc.DownloadStringAsync(new Uri(HeadlineUrl));
             
         }
 
@@ -59,7 +64,7 @@ namespace NewsApp
 
             WebClient wc = new WebClient();
             wc.DownloadStringCompleted += wc_MostReadDownloadCompleted;
-            wc.DownloadStringAsync(new Uri("http://feeds.bbci.co.uk/rss/newsonline_uk_edition/livestats/most_emailed/rss.xml"));
+            wc.DownloadStringAsync(new Uri(MostReadUrl));
         }
 
         private void FillReadLater()
@@ -70,48 +75,45 @@ namespace NewsApp
 
         private void wc_MostReadDownloadCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            var media = XNamespace.Get("http://search.yahoo.com/mrss/");
-            var result = e.Result;
+            //var media = XNamespace.Get("http://search.yahoo.com/mrss/");
+            //var result = e.Result;
 
-            XElement items = XElement.Parse(result);
-            var mostRead = items.Descendants("item")
-                   .Select(item => new FeedItem
-                   {
-                       Title = item.Element("title").Value,
-                       Description = item.Element("description").Value,
-                       ImageUri = item.Element(media + "thumbnail") != null ? item.Element(media + "thumbnail").Attribute("url").Value : null,//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
-                       ItemLink = item.Element("link").Value != null ? item.Element("link").Value : null
-                   }).Take(5);
+            //XElement items = XElement.Parse(result);
+            //var mostRead = items.Descendants("item")
+            //       .Select(item => new FeedItem
+            //       {
+            //           Title = item.Element("title").Value,
+            //           Description = item.Element("description").Value,
+            //           ImageUri = item.Element(media + "thumbnail") != null ? item.Element(media + "thumbnail").Attribute("url").Value : null,//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
+            //           ItemLink = item.Element("link").Value != null ? item.Element("link").Value : null
+            //       }).Take(5);
 
-            foreach (var item in mostRead)
+            //foreach (var item in mostRead)
+            //{
+            //    MostReadItems.Add(item);
+            //}
+
+            FeedDataAccess da = new FeedDataAccess();
+
+            foreach (var headline in da.GetFeed(e.Result))
             {
-                MostReadItems.Add(item);
+                MostReadItems.Add(headline);
             }
+
         }
 
         void wc_HeadlinesDownloadCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
-            var media = XNamespace.Get("http://search.yahoo.com/mrss/");
-            var result = e.Result;
-
-            XElement items = XElement.Parse(result);
-            var headlines = items.Descendants("item")
-                   .Select(item => new FeedItem
-                   {
-                       Title = item.Element("title").Value,
-                       Description = item.Element("description").Value,
-                       ImageUri = item.Element(media+"thumbnail").Attribute("url").Value,//Where(i => i.Attribute("width").Value == "144" && i.Attribute("height").Value == "81").Select(i => i.Attribute("url").Value).SingleOrDefault())
-                       ItemLink = item.Element("link").Value,
-                       Publisher = "BBC"
-                   });
-
-            foreach (var item in headlines)
-            {
-                HeadlineItems.Add(item);
-            }
-
             
+            FeedDataAccess da = new FeedDataAccess();
+
+            foreach (var headline in da.GetFeed(e.Result))
+            {
+                HeadlineItems.Add(headline); 
+            }
         }
+
+        
 
         private void ListBoxHeadlines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

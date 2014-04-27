@@ -15,7 +15,7 @@ namespace NewsApp
     public partial class ItemDetail : PhoneApplicationPage
     {
         private Uri link;
-        private const string MOBILIZIER = "http://mobilizer.instapaper.com/m?u=";
+        private const string MOBILIZIER = "http://www.google.com/gwt/x?u=";//"http://mobilizer.instapaper.com/m?u=";
 
         public ItemDetail()
         {

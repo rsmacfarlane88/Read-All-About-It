@@ -2,7 +2,7 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
   <App xmlns="" ProductID="{708e8c55-57ee-41e4-8d25-7a6caecd5a2e}" Title="NewsApp" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="BBCNewsApp author" Description="Sample description" Publisher="BBCNewsApp" PublisherID="{932fc401-5a04-425d-8ead-c568a52ece3e}">
-    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+    <IconPath IsRelative="true" IsResource="false">news.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
@@ -19,7 +19,7 @@
         <TemplateFlip>
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">newsTileMed.png</BackgroundImageURI>
           <Title>NewsApp</Title>
           <BackContent>
           </BackContent>

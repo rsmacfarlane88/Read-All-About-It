@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NewsApp
 {
-    
+
     public class FeedItem
     {
         public string Title { get; set; }
@@ -14,5 +14,10 @@ namespace NewsApp
         public string ImageUri { get; set; }
         public string ItemLink { get; set; }
         public string Publisher { get; set; }
+
+        public string PublisherDisplay
+        {
+            get { return "[" + Publisher + "]"; }
+        }
     }
 }

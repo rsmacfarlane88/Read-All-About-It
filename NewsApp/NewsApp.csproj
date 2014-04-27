@@ -165,6 +165,8 @@
     <Content Include="Images\panorama.png" />
     <Content Include="Images\refresh.png" />
     <Content Include="Images\share.png" />
+    <Content Include="news.png" />
+    <Content Include="newsTileMed.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />

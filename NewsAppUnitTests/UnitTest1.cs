@@ -10,8 +10,8 @@ namespace NewsAppUnitTests
         [TestMethod]
         public void GetHeadlines()
         {
-            
-
+            FeedDataAccess da = new FeedDataAccess();
+            da.GetFeed("http://feeds.bbci.co.uk/news/rss.xml");
         }
     }
 }
